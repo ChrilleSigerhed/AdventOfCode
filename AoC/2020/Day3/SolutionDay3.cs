@@ -27,7 +27,7 @@ public class SolutionDay3
         }
         return treeCounter;
     }
-    public Int64 Solution2()
+    public int Solution2()
     {
         char tree = '#';
         int slope1 = 0;
@@ -79,7 +79,7 @@ public class SolutionDay3
             }
             slope5++;
         }
-        Int64 result = treeCounter1 * treeCounter2 * treeCounter3 * treeCounter4 * treeCounter5;
+        int result = treeCounter1 * treeCounter2 * treeCounter3 * treeCounter4 * treeCounter5;
         return result;
     }
 }
