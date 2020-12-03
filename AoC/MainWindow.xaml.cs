@@ -28,7 +28,7 @@ namespace AoC
         SolutionDay3 solutionDay3 = new SolutionDay3();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            solutionDay3.Solution2();
+            solutionDay3.Solution1();
         }
     }
 }

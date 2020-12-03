@@ -11,22 +11,9 @@ public class SolutionDay3
 
     public int Solution1()
     {
-        char tree = '#';
         int slope = 2;
-        int treeCounter = 0;
-        for (int i = 1; i < Input.Length; i++)
-        {
-            while (Input[i].Length <= slope)
-            {
-                Input[i] += Input[i];
-            }
-            if (Input[i][slope+1] == tree)
-            {
-                treeCounter++;
-            }
-            slope += 3;
-        }
-        return treeCounter;
+        int result = SlopesWithoutJump(slope);
+        return result;
     }
     public int Solution2()
     {
