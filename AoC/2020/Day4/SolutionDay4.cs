@@ -5,16 +5,17 @@ using System.Text;
 
 public class SolutionDay4
 {
+
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day4\Input.txt");
     public string abc { get; set; } = "abcdef";
-    public string[] EyeColour { get; set; } = { "amb" , "blu" , "brn", "gry", "grn", "hzl", "oth" };    
+    public string[] EyeColour { get; set; } = { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
     public string[] Solution1()
     {
         int counter = 0;
         string[] sortedInput = new string[291];
         for (int i = 0; i < Input.Length; i++)
         {
-            if(Input[i] != "")
+            if (Input[i] != "")
             {
                 sortedInput[counter] += Input[i] + " ";
             }
@@ -27,7 +28,7 @@ public class SolutionDay4
         string[] validString = new string[235];
         for (int i = 0; i < sortedInput.Length; i++)
         {
-            if(sortedInput[i].Contains("byr") && sortedInput[i].Contains("iyr") && sortedInput[i].Contains("eyr") && sortedInput[i].Contains("hgt") && sortedInput[i].Contains("hcl") && sortedInput[i].Contains("ecl") && sortedInput[i].Contains("pid"))
+            if (sortedInput[i].Contains("byr") && sortedInput[i].Contains("iyr") && sortedInput[i].Contains("eyr") && sortedInput[i].Contains("hgt") && sortedInput[i].Contains("hcl") && sortedInput[i].Contains("ecl") && sortedInput[i].Contains("pid"))
             {
                 validString[counter] = sortedInput[i];
                 counter++;
@@ -123,22 +124,16 @@ public class SolutionDay4
                 {
                     if (passwordString[j][4] == '#')
                     {
-
                         string digit = "";
                         for (int k = 5; k < passwordString[j].Length; k++)
                         {
-
                             digit += passwordString[j][k];
-
                         }
                         if (digit.Length == 6)
                         {
                             correftInfo++;
                         }
-
-
                     }
-
                 }
                 else if (passwordString[j].Contains("ecl"))
                 {
@@ -179,5 +174,7 @@ public class SolutionDay4
         return goodPassword;
         
     }
+
+    
 }
 
