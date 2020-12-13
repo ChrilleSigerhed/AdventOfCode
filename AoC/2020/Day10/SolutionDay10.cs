@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 
@@ -9,6 +10,7 @@ public class SolutionDay10
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day10\Input.txt");
     List<int> ChangedIndex = new List<int>();
     public List<int> JoltageRating { get; set; } = new List<int>();
+    public Dictionary<int, long> checkedIndex = new Dictionary<int, long>();
 
     public int Solution1()
     {
@@ -43,41 +45,34 @@ public class SolutionDay10
             JoltageRating.Add(num);
         }
         JoltageRating.Sort();
-        int topIndex = JoltageRating.Count - 1;
-        int topValue = JoltageRating[topIndex];
-        JoltageRating.Add(topValue);
-        long changedIndex = FindCombination(topIndex);
-        long result = changedIndex + 1;
+        long result = FindCombination(0);
+
+
         return result;
     }
+
     private long FindCombination(int index)
     {
-        int counter = 0;
-        long result = 0;
-        if(index != 0)
+        long counter = 0;
+        if(index == JoltageRating.Count -1)
         {
-            if (JoltageRating[index] - 1 == JoltageRating[index - 1]) counter++;
-            if (JoltageRating[index] - 2 == JoltageRating[index - 1]) counter++;
-            if (JoltageRating[index] - 3 == JoltageRating[index - 1]) counter++;
-            if (index > 1)
-            {
-                if (JoltageRating[index] - 1 == JoltageRating[index - 2]) counter++;
-                if (JoltageRating[index] - 2 == JoltageRating[index - 2]) counter++;
-                if (JoltageRating[index] - 3 == JoltageRating[index - 2]) counter++;
-            }
-            if(index > 2)
-            {
-                if (JoltageRating[index] - 1 == JoltageRating[index - 3]) counter++;
-                if (JoltageRating[index] - 2 == JoltageRating[index - 3]) counter++;
-                if (JoltageRating[index] - 3 == JoltageRating[index - 3]) counter++;
-            }
-            if (counter > 1)
-            {
-                result += counter;
-            }
-            result += FindCombination(index - 1);
+            return 1;
         }
-        return result;
+        if (checkedIndex.ContainsKey(index))
+        {
+            return checkedIndex[index];
+        }
+        for (int i = index + 1; i < JoltageRating.Count; i++)
+        {
+            if (JoltageRating[i] - JoltageRating[index] <= 3)
+            {
+                counter += FindCombination(i);
+            }
+        }
+        checkedIndex.Add(index, counter);
+        
+        return counter;
+
     }
 }
 
