@@ -6,7 +6,7 @@ using System.Text;
 
 public class SolutionDay11
 {
-    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\chris\Source\Repos\AdventOfCode\AoC\2020\Day11\Input.txt");
+    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day11\Input.txt");
 
     public int Solution1()
     {
@@ -24,7 +24,7 @@ public class SolutionDay11
                 {
                     if (Input[i][j] == emptySeat)
                     {
-                        if (CheckIfPeopleCanSit(i, j))
+                        if (CheckIfPeopleCanSitEmptyChair(i, j))
                         {
                             input[i] += seat;
                             change = true;
@@ -83,7 +83,7 @@ public class SolutionDay11
                 {
                     if (Input[i][j] == emptySeat)
                     {
-                        if (CheckAllRotes(i, j))
+                        if (CheckAllRotesEmptyChair(i, j))
                         {
                             input[i] += seat;
                             change = true;
@@ -99,7 +99,7 @@ public class SolutionDay11
                     }
                     if (Input[i][j] == seat)
                     {
-                        if (CheckIfPeopleCanSit(i, j))
+                        if (CheckAllRotesFilledChair(i, j))
                         {
                             input[i] += seat;
                         }
@@ -126,51 +126,187 @@ public class SolutionDay11
         }
         return counter;
     }
+    private bool CheckAllRotesFilledChair(int ind, int position)
+    {
+        int index = ind;
+        int pos = position;
+        int counter = 0;
+        while (index != Input.Length - 1)
+        {
+            index++;
+            if (Input[index][pos] == '#') // check all down
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+        }
+        index = ind;
+        pos = position;
+        while (pos != Input[index].Length - 1) // check all right
+        {
+            pos++;
+            if (Input[index][pos] == '#') // check all down
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
 
-    private bool CheckAllRotes(int ind, int position)
+        }
+        index = ind;
+        pos = position;
+        while (pos > 0) // check all left
+        {
+            pos--;
+            if (Input[index][pos] == '#') // check all down
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+
+        }
+        index = ind;
+        pos = position;
+        while (index != 0)
+        {
+            index--;
+            if (Input[index][pos] == '#') // check all down
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+
+        }
+        index = ind;
+        pos = position;
+        while (index != 0 && pos != 0) // check diagonal up left
+        {
+            index--;
+            pos--;
+            if (Input[index][pos] == '#')
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+
+        }
+        index = ind;
+        pos = position;
+        while (index != 0 && pos != Input[index].Length - 1) // check diagonal up right
+        {
+            index--;
+            pos++;
+            if (Input[index][pos] == '#')
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+        }
+        index = ind;
+        pos = position;
+        while (index != Input.Length - 1 && pos != 0) // check digonal down left
+        {
+            index++;
+            pos--;
+            if (Input[index][pos] == '#')
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+        }
+        index = ind;
+        pos = position;
+        while (index != Input.Length - 1 && pos != Input[index].Length - 1)
+        {
+            index++;
+            pos++;
+            if (Input[index][pos] == '#')
+            {
+                counter++;
+                break;
+            }
+            if (Input[index][pos] == 'L')
+            {
+                break;
+            }
+        }
+        if(counter >= 5)
+        {
+            return false;
+        }
+        return true;
+    }
+    private bool CheckAllRotesEmptyChair(int ind, int position)
     {
        
         int index = ind;
         int pos = position;
-        while(index != Input.Length)
+        while(index != Input.Length -1)
         {
             index++;
             if (Input[index][pos] == '#') // check all down
             {
                 return false;
             }
-            if(Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if(Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
         }
         index = ind;
         pos = position;
-        while (pos != Input[index].Length) // check all right
+        while (pos != Input[index].Length - 1) // check all right
         {
             pos++;
             if (Input[index][pos] == '#') // check all down
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if ( Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
 
         }
         index = ind;
         pos = position;
-        while (pos < 0) // check all left
+        while (pos > 0) // check all left
         {
             pos--;
             if (Input[index][pos] == '#') // check all down
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
             
         }
@@ -183,9 +319,9 @@ public class SolutionDay11
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
             
         }
@@ -199,15 +335,15 @@ public class SolutionDay11
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
             
         }
         index = ind;
         pos = position;
-        while (index != 0 && pos != 0) // check diagonal up right
+        while (index != 0 && pos != Input[index].Length - 1) // check diagonal up right
         {
             index--;
             pos++;
@@ -215,14 +351,14 @@ public class SolutionDay11
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
         }
         index = ind;
         pos = position;
-        while (index != Input.Length && pos != Input[index].Length) // check digonal down left
+        while (index != Input.Length - 1 && pos != 0) // check digonal down left
         {
             index++;
             pos--;
@@ -230,14 +366,14 @@ public class SolutionDay11
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
         }
         index = ind;
         pos = position;
-        while (index != Input.Length && pos != 0)
+        while (index != Input.Length - 1 && pos != Input[index].Length - 1)
         {
             index++;
             pos++;
@@ -245,9 +381,9 @@ public class SolutionDay11
             {
                 return false;
             }
-            if (Input[index][pos] == '.' || Input[index][pos] == 'L')
+            if (Input[index][pos] == 'L')
             {
-                return true;
+                break;
             }
         }
         return true;
@@ -333,7 +469,7 @@ public class SolutionDay11
             }
             
         }
-        if (counter >= 5) return false;
+        if (counter >= 4) return false;
         return true;
     }
     private bool CheckIfPeopleCanSitEmptyChair(int index, int position)

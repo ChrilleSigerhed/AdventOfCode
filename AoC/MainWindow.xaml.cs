@@ -25,7 +25,7 @@ namespace AoC
         {
             InitializeComponent();
         }
-        SolutionDay11 solutionDay5 = new SolutionDay11();
+        SolutionDay12 solutionDay5 = new SolutionDay12();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             solutionDay5.Solution1();
