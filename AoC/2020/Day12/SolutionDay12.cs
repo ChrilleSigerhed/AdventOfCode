@@ -10,6 +10,7 @@ public class SolutionDay12
     public List<char> Directions { get; set; } = new List<char>();
     public List<int> Values { get; set; } = new List<int>();
     public Dictionary<char, int> BoatPosition { get; set; } = new Dictionary<char, int>();
+    public Dictionary<char, int> WayPoint { get; set; } = new Dictionary<char, int>();
     public int Solution1()
     {
         foreach (var instruction in Input)
@@ -62,6 +63,74 @@ public class SolutionDay12
         var ManhattanDistance = Math.Abs(BoatPosition['N'] - BoatPosition['S']) + Math.Abs(BoatPosition['W'] - BoatPosition['E']);
         return ManhattanDistance;
     }
+    public int Solution2()
+    {
+        foreach (var instruction in Input)
+        {
+            char direction = instruction[0];
+            int values = Convert.ToInt32(instruction.Substring(1));
+            Directions.Add(direction);
+            Values.Add(values);
+        }
+        int manhattanDistanceX = 0;
+        int manhattanDistanceY = 0;
+        int x = 10;
+        int y = 1;
+
+        for (int i = 0; i < Directions.Count; i++)
+        {
+            if(Directions[i] == 'N')
+            {
+                y += Values[i];
+            }
+            if(Directions[i] == 'S')
+            {
+                y -= Values[i];
+            }
+            if(Directions[i] == 'W')
+            {
+                x -= Values[i];
+            }
+            if(Directions[i] == 'E')
+            {
+                x += Values[i];
+            }
+            if(Directions[i] == 'F')
+            {
+                manhattanDistanceX += Values[i] * x;
+                manhattanDistanceY += Values[i] * y;
+            }
+            if(Directions[i] == 'L')
+            {
+                while(Values[i] != 0)
+                {
+                    Values[i] -= 90;
+                    int wayPointX = x;
+                    int wayPointY = y;
+                    x = -wayPointY;
+                    y = wayPointX;
+                }
+               
+
+            }
+            if (Directions[i] == 'R')
+            {
+                while (Values[i] != 0)
+                {
+                    Values[i] -= 90;
+                    int wayPointX = x;
+                    int wayPointY = y;
+                    x = wayPointY;
+                    y = -wayPointX;
+                }
+            }
+        }
+        var result = Math.Abs(manhattanDistanceX) + Math.Abs(manhattanDistanceY);
+        return result;
+        ;
+    }
+    
+    
     private char GetDirectionRight(char lastBoatDirection, int rotation)
     {
         if (lastBoatDirection == 'N')
