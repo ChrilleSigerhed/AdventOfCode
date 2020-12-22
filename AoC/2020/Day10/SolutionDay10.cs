@@ -12,7 +12,7 @@ public class SolutionDay10
     public List<int> JoltageRating { get; set; } = new List<int>();
     public Dictionary<int, long> checkedIndex = new Dictionary<int, long>();
 
-    public int Solution1()
+    public int Part1()
     {
         foreach (string number in Input)
         {
@@ -36,7 +36,7 @@ public class SolutionDay10
         int result = plusOne * plusThree;
         return result;
     }
-    public long Solution2()
+    public long Part2()
     {
         JoltageRating.Add(0);
         foreach (string number in Input)

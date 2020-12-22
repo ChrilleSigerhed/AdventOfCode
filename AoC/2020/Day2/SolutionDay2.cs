@@ -8,7 +8,7 @@ public class SolutionDay2
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day2\Input.txt");
 
-    public int Solution1()
+    public int Part1()
     {
         int maxValue;
         int minValue;
@@ -34,7 +34,7 @@ public class SolutionDay2
         }
         return correctPassword;
     }
-    public int Solution2()
+    public int Part2()
     {
         int maxValue;
         int minValue;

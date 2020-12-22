@@ -9,7 +9,7 @@ public class SolutionDay4
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day4\Input.txt");
     public string abc { get; set; } = "abcdef";
     public string[] EyeColour { get; set; } = { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
-    public string[] Solution1()
+    public string[] Part1()
     {
         int counter = 0;
         string[] sortedInput = new string[291];
@@ -36,9 +36,9 @@ public class SolutionDay4
         }
         return validString;
     }
-    public int Solution2()
+    public int Part2()
     {
-        string[] sortedList = Solution1();
+        string[] sortedList = Part1();
         int goodPassword = 0;
         for (int i = 0; i < sortedList.Length; i++)
         {

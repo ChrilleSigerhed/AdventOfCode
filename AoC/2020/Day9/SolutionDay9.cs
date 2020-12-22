@@ -8,7 +8,7 @@ public class SolutionDay9
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day9\Input.txt");
 
-    public long Solution()
+    public long Part1and2()
     {
         List<long> XMAS = new List<long>();
         foreach (string number in Input)

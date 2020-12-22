@@ -11,7 +11,7 @@ public class SolutionDay12
     public List<int> Values { get; set; } = new List<int>();
     public Dictionary<char, int> BoatPosition { get; set; } = new Dictionary<char, int>();
     public Dictionary<char, int> WayPoint { get; set; } = new Dictionary<char, int>();
-    public int Solution1()
+    public int Part1()
     {
         foreach (var instruction in Input)
         {
@@ -24,6 +24,7 @@ public class SolutionDay12
         BoatPosition.Add('N', 0);
         BoatPosition.Add('W', 0);
         BoatPosition.Add('E', 0);
+        char[] boatDirections = new char[4] { 'N', 'E', 'S', 'W' };
         char lastBoatDirection = 'E';
         for (int i = 0; i < Directions.Count; i++)
         {
@@ -39,31 +40,40 @@ public class SolutionDay12
             {
                 if(Directions[i] == 'R')
                 {
-                    int rotation = 0;
-                    while(Values[i] != 0)
+                    int index = Array.IndexOf(boatDirections, lastBoatDirection);
+                    while (Values[i] != 0)
                     {
+                        index++;
+                        if (index == 4)
+                        {
+                            index = 0;
+                        }
+                        lastBoatDirection = boatDirections[index];
                         Values[i] -= 90;
-                        rotation++;
                     }
-                    lastBoatDirection = GetDirectionRight(lastBoatDirection, rotation);
 
                 }
                 if(Directions[i] == 'L')
                 {
-                    int rotation = 0;
+                    int index = Array.IndexOf(boatDirections, lastBoatDirection);
+                    index -= 1;
                     while (Values[i] != 0)
                     {
+                        if (index < 0)
+                        {
+                            index = 3;
+                        }
+                        lastBoatDirection = boatDirections[index];
+                        index--;
                         Values[i] -= 90;
-                        rotation++;
                     }
-                    lastBoatDirection = GetDirectionLeft(lastBoatDirection, rotation);
                 }
             }
         }
         var ManhattanDistance = Math.Abs(BoatPosition['N'] - BoatPosition['S']) + Math.Abs(BoatPosition['W'] - BoatPosition['E']);
         return ManhattanDistance;
     }
-    public int Solution2()
+    public int Part2()
     {
         foreach (var instruction in Input)
         {
@@ -127,44 +137,6 @@ public class SolutionDay12
         }
         var result = Math.Abs(manhattanDistanceX) + Math.Abs(manhattanDistanceY);
         return result;
-        ;
-    }
-    
-    
-    private char GetDirectionRight(char lastBoatDirection, int rotation)
-    {
-        char[] boatDirections = new char[4] { 'N', 'E', 'S', 'W' };
-        int index = Array.IndexOf(boatDirections, lastBoatDirection);
-        char newBoatDirection = ' ';
-        while (rotation != 0)
-        {
-            index++;
-            if(index == 4)
-            {
-                index = 0;
-            }
-            newBoatDirection = boatDirections[index];
-            rotation -= 1;
-        }
-        return newBoatDirection;
-    }
-    private char GetDirectionLeft(char lastBoatDirection, int rotation)
-    {
-        char[] boatDirections = new char[4] { 'N', 'E', 'S', 'W' };
-        int index = Array.IndexOf(boatDirections, lastBoatDirection);
-        index -= 1;
-        char newBoatDirection = ' ';
-        while (rotation != 0)
-        {
-            if (index < 0)
-            {
-                index = 3;
-            }
-            newBoatDirection = boatDirections[index];
-            index--;
-            rotation -= 1;
-        }
-        return newBoatDirection;
     }
 }
 

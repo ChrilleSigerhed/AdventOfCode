@@ -7,11 +7,11 @@ using System.Text.RegularExpressions;
 
 public class SolutionDay7
 {
-	private IDictionary<string, List<Bag>> _bags = new Dictionary<string, List<Bag>>();
+	private IDictionary<string, List<Bag>> bags = new Dictionary<string, List<Bag>>();
 	private string _bagRegex = @"\d+ (\w* \w* \w*)";
 	public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day7\Input.txt");
 
-    public int Solution1()
+    public int Part1()
     {
         string[] bags = new string[2];
         List<string> totalBags = new List<string>();
@@ -48,7 +48,7 @@ public class SolutionDay7
         }
         return totalBags.Count;
     }
-	public int Solution2()
+	public int Part2()
 	{
 
 		foreach (string rule in Input)
@@ -56,7 +56,7 @@ public class SolutionDay7
 			string bagName = rule.Split(" contain ")[0];
 			if (rule.Contains("contain no other bags"))
 			{
-				_bags.Add(bagName, new List<Bag>());
+				bags.Add(bagName, new List<Bag>());
 			}
 			else
 			{
@@ -67,11 +67,11 @@ public class SolutionDay7
 					string name = match.Value.Substring(spaceLocation + 1);
 					return new Bag() { Count = count, Name = name };
 				}).ToList();
-				_bags.Add(bagName, groups);
+				bags.Add(bagName, groups);
 			}
 		}
 
-		List<Bag> shinyGoldBag = _bags.FirstOrDefault(f => f.Key == "shiny gold bags").Value;
+		List<Bag> shinyGoldBag = bags.FirstOrDefault(f => f.Key == "shiny gold bags").Value;
 		int total = BagsCount(shinyGoldBag);
 
 		return total;
@@ -85,7 +85,7 @@ public class SolutionDay7
 			string name = bagInfo.Name;
 			if (!name.EndsWith("s"))
 				name += "s";
-			List<Bag> bagList = _bags.FirstOrDefault(f => f.Key == name).Value;
+			List<Bag> bagList = bags.FirstOrDefault(f => f.Key == name).Value;
 			if (bagList.Count != 0)
 				counter += bagInfo.Count * BagsCount(bagList);
 

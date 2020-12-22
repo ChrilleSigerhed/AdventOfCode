@@ -9,7 +9,7 @@ public class SolutionDay6
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day6\Input.txt");
 
-    public int Solution1()
+    public int Part1()
     {
         string[] allQuestions = new string[480];
         List<string> countedQuestions = new List<string>();
@@ -42,7 +42,7 @@ public class SolutionDay6
         }
         return totalQuestions;
     }
-    public int Solution2()
+    public int Part2()
     {
         string[] allQuestions = new string[960];
         List<string> countedQuestions = new List<string>();

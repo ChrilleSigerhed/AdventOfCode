@@ -8,7 +8,7 @@ public class SolutionDay5
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day5\Input.txt");
 
-    public int Solution()
+    public int Part1and2()
     {
         int[] seatID = new int[Input.Length];
         

@@ -8,7 +8,7 @@ public class SolutionDay8
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day8\Input.txt");
     public bool Changed { get; set; } = false;
 
-    public int Solution1()
+    public int Part1()
     {
         var jump = "jmp";
         var accelerate = "acc";
@@ -33,7 +33,7 @@ public class SolutionDay8
         }
         return accumaccumulator;
     }
-    public int Solution2()
+    public int Part2()
     {
         var jump = "jmp";
         var nope = "nop";

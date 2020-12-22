@@ -8,7 +8,7 @@ public class SolutionDay11
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day11\Input.txt");
 
-    public int Solution1()
+    public int Part1()
     {
         char seat = '#';
         char emptySeat = 'L';
@@ -67,7 +67,7 @@ public class SolutionDay11
         }
         return counter;
     }
-    public int Solution2()
+    public int Part2()
     {
         char seat = '#';
         char emptySeat = 'L';

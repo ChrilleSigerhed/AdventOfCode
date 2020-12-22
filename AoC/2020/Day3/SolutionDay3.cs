@@ -9,13 +9,13 @@ public class SolutionDay3
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day3\Input.txt");
     public char Trees { get; set; } = '#';
 
-    public int Solution1()
+    public int Part1()
     {
         int slope = 2;
         int result = SlopesWithoutJump(slope);
         return result;
     }
-    public int Solution2()
+    public int Part2()
     {
         int slope = 0;
         int result = 0;

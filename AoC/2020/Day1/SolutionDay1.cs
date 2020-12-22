@@ -9,7 +9,7 @@ public class SolutionDay1
 {
     public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day1\Input.txt");
 
-    public int[] Solution1()
+    public int[] Part1()
     {
         int[] result = new int[2];
         for (int i = 0; i < Input.Length; i++)
@@ -25,7 +25,7 @@ public class SolutionDay1
         }
         return result;
     }
-    public int[] Solution2()
+    public int[] Part2()
     {
         int[] result = new int[3];
         for (int i = 0; i < Input.Length; i++)
