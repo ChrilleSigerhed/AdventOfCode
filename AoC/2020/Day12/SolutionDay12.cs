@@ -6,7 +6,7 @@ using System.Text;
 
 public class SolutionDay12
 {
-    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\chris\Source\Repos\AdventOfCode\AoC\2020\Day12\Input.txt");
+    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day12\Input.txt");
     public List<char> Directions { get; set; } = new List<char>();
     public List<int> Values { get; set; } = new List<int>();
     public Dictionary<char, int> BoatPosition { get; set; } = new Dictionary<char, int>();
@@ -133,132 +133,38 @@ public class SolutionDay12
     
     private char GetDirectionRight(char lastBoatDirection, int rotation)
     {
-        if (lastBoatDirection == 'N')
+        char[] boatDirections = new char[4] { 'N', 'E', 'S', 'W' };
+        int index = Array.IndexOf(boatDirections, lastBoatDirection);
+        char newBoatDirection = ' ';
+        while (rotation != 0)
         {
-            if (rotation == 1)
+            index++;
+            if(index == 4)
             {
-                return 'E';
+                index = 0;
             }
-            if (rotation == 2)
-            {
-                return 'S';
-            }
-            if (rotation == 3)
-            {
-                return 'W';
-            }
+            newBoatDirection = boatDirections[index];
+            rotation -= 1;
         }
-        if (lastBoatDirection == 'S')
-        {
-            if (rotation == 1)
-            {
-                return 'W';
-            }
-            if (rotation == 2)
-            {
-                return 'N';
-            }
-            if (rotation == 3)
-            {
-                return 'E';
-            }
-        }
-        if (lastBoatDirection == 'W')
-        {
-            if (rotation == 1)
-            {
-                return 'N';
-            }
-            if (rotation == 2)
-            {
-                return 'E';
-            }
-            if (rotation == 3)
-            {
-                return 'S';
-            }
-        }
-        if (lastBoatDirection == 'E')
-        {
-            if (rotation == 1)
-            {
-                return 'S';
-            }
-            if (rotation == 2)
-            {
-                return 'W';
-            }
-            if (rotation == 3)
-            {
-                return 'N';
-            }
-        }
-        return ' ';
+        return newBoatDirection;
     }
     private char GetDirectionLeft(char lastBoatDirection, int rotation)
     {
-        if (lastBoatDirection == 'N')
+        char[] boatDirections = new char[4] { 'N', 'E', 'S', 'W' };
+        int index = Array.IndexOf(boatDirections, lastBoatDirection);
+        index -= 1;
+        char newBoatDirection = ' ';
+        while (rotation != 0)
         {
-            if (rotation == 1)
+            if (index < 0)
             {
-                return 'W';
+                index = 3;
             }
-            if (rotation == 2)
-            {
-                return 'S';
-            }
-            if (rotation == 3)
-            {
-                return 'E';
-            }
+            newBoatDirection = boatDirections[index];
+            index--;
+            rotation -= 1;
         }
-        if (lastBoatDirection == 'S')
-        {
-            if (rotation == 1)
-            {
-                return 'E';
-            }
-            if (rotation == 2)
-            {
-                return 'N';
-            }
-            if (rotation == 3)
-            {
-                return 'W';
-            }
-        }
-        if (lastBoatDirection == 'W')
-        {
-            if (rotation == 1)
-            {
-                return 'S';
-            }
-            if (rotation == 2)
-            {
-                return 'E';
-            }
-            if (rotation == 3)
-            {
-                return 'N';
-            }
-        }
-        if (lastBoatDirection == 'E')
-        {
-            if (rotation == 1)
-            {
-                return 'N';
-            }
-            if (rotation == 2)
-            {
-                return 'W';
-            }
-            if (rotation == 3)
-            {
-                return 'S';
-            }
-        }
-        return ' ';
+        return newBoatDirection;
     }
-
 }
 
