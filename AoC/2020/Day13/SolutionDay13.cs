@@ -2,85 +2,60 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using MoreLinq;
 using System.Text;
+
 
 
 public class SolutionDay13
 {
-    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day13\Input.txt");
+    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\chris\Source\Repos\AdventOfCode\AoC\2020\Day13\Input.txt");
     public List<string> busID = new List<string>();
     public List<int> busIntervall = new List<int>();
-    public int Part1()
+    public Dictionary<long,int> MinToWait { get; set; } = new Dictionary<long,int>();
+    public long Part1()
     {
-        int timestamp = int.Parse(Input[0]);
-        string[] input = Input[1].Split(",");
-        Dictionary<int, int> TimeToWait = new Dictionary<int, int>();
-        foreach (string budId in input)
+        var earliestLeavingTime = long.Parse(Input[0]);
+        var busses = Input[1].Split(',').Where(x => x != "x").Select(int.Parse).ToList();
+
+        for (int i = 0; i < busses.Count; i++)
         {
-            if(budId != "x")
+            int waitedMinutes = 0;
+            var time = earliestLeavingTime;
+            while (time % busses[i] != 0)
             {
-                busID.Add("");
-                int intervall = int.Parse(budId);
-                busIntervall.Add(intervall);
-                TimeToWait.Add(intervall, 0);
+                time++;
+                waitedMinutes++;
             }
+            var waitTime = (time - earliestLeavingTime) * busses[i];
+            MinToWait.Add(waitTime, waitedMinutes);
         }
-        for (int i = 0; i < busID.Count; i++)
-        {
-            busID[i] = DepartTimes(busID[i], timestamp, busIntervall[i]);
-        }
-        for (int i = 0; i < TimeToWait.Count; i++)
-        {
-            bool depart = false;
-            int time = timestamp;
-            int counter = 0;
-            while (depart == false)
-            {
-                if(busID[i][time] == 'D')
-                {
-                    counter++;
-                    depart = true;
-                    TimeToWait[busIntervall[i]] = counter;
-                }
-                else
-                {
-                    counter++;
-                    time++;
-                }
-            }
-        }
-        int lowestWaitTime = 100000000;
-        int buss = 0;
-        for (int i = 0; i < TimeToWait.Count; i++)
-        {
-            if(TimeToWait.ElementAt(i).Value < lowestWaitTime)
-            {
-                lowestWaitTime = TimeToWait.ElementAt(i).Value;
-                buss = busIntervall[i];
-            }
-        }
-        int result = buss * lowestWaitTime;
+        long lowestWait = MinToWait.Min(x => x.Value);
+        var result = MinToWait.FirstOrDefault(x => x.Value == lowestWait).Key;
         return result;
     }
-    public string DepartTimes(string busID, int timestamp, int busIntervall)
+    public long Part2()
     {
-        int buss = busIntervall - 1;
-        for (int i = 0; i < busIntervall; i++)
+        var pattern = Input[1].Split(',').Select(x => x == "x" ? -1 : long.Parse(x)).ToList();
+        var time = 0L;
+        var inc = pattern[0];
+        for (var p = 1; p < pattern.Count; p++)
         {
-            if (i == buss)
+            if (pattern[p] != -1)
             {
-                busID += "D";
-            }
-            else
-            {
-                busID += ".";
+                var newTime = pattern[p];
+                while (true)
+                {
+                    time += inc;
+                    if ((time + p) % newTime == 0)
+                    {
+                        inc *= newTime;
+                        break;
+                    }
+                }
             }
         }
-        while(busID.Length < timestamp)
-        {
-            busID += busID;
-        }
-        return busID;
+        return time;
     }
 }
 
