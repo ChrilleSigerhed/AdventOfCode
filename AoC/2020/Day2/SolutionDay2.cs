@@ -6,10 +6,14 @@ using System.Text;
 
 public class SolutionDay2
 {
-    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day2\Input.txt");
+    public string[] Inputs { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day2\Input.txt");
 
-    public int Part1()
+    public int Part1(string[] Input)
     {
+        if (Input == null)
+        {
+            Input = Inputs;
+        }
         int maxValue;
         int minValue;
         int counter;
@@ -34,8 +38,12 @@ public class SolutionDay2
         }
         return correctPassword;
     }
-    public int Part2()
+    public int Part2(string[] Input)
     {
+        if (Input == null)
+        {
+            Input = Inputs;
+        }
         int maxValue;
         int minValue;
         int counter;
