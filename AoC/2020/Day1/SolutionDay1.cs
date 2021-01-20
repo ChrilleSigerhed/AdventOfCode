@@ -7,10 +7,13 @@ using System.Text;
 
 public class SolutionDay1
 {
-    public string[] Input { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day1\Input.txt");
-
-    public int[] Part1()
+    public string[] Inputs { get; set; } = File.ReadAllLines(@"C:\Users\ChrillE\source\repos\AoC\AoC\2020\Day1\Input.txt");
+    public int Part1(string[] Input)
     {
+        if(Input == null)
+        {
+            Input = Inputs;
+        }
         int[] result = new int[2];
         for (int i = 0; i < Input.Length; i++)
         {
@@ -23,10 +26,16 @@ public class SolutionDay1
                 }
             }
         }
-        return result;
+        int answer = result[0] * result[1];
+        return answer;
     }
-    public int[] Part2()
+    public int Part2(string[] Input)
     {
+        if (Input == null)
+        {
+            Input = Inputs;
+        }
+
         int[] result = new int[3];
         for (int i = 0; i < Input.Length; i++)
         {
@@ -43,7 +52,8 @@ public class SolutionDay1
                 }
             }
         }
-        return result;
+        int answer = result[0] * result[1] * result[2];
+        return answer;
     }
 }
 
